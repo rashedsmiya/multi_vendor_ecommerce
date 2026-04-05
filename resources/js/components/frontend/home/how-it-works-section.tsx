@@ -51,7 +51,7 @@ export default function HowItWorksSection() {
                                     <div className="mb-5 flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-primary-100 text-primary-500">
                                         <Icon className="h-7 w-7" strokeWidth={2} />
                                     </div>
-                                    <h3 className="mb-3 text-lg font-medium text-figma-heading-alt">{title}</h3>
+                                    <h3 className="mb-3 text-lg font-medium text-figma-heading-alt text-gray-900">{title}</h3>
                                     <p className="text-sm leading-relaxed text-gray-600">{description}</p>
                                 </div>
                             </FadeInSection>
