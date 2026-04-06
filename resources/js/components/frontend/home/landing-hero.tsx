@@ -32,7 +32,7 @@ const badgeItem = {
     },
 };
 
-export default function LandingHerro() {
+export default function LandingHero() {
     const features = [
         {
             key: 'verified',
