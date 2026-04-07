@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\BuyerMiddleware;
 use App\Http\Middleware\HandleAppearance;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Foundation\Application;
@@ -30,6 +31,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->alias([
             'admin' => AdminMiddleware::class,
+            'buyer' => BuyerMiddleware::class,
         ]);
 
         $middleware->redirectGuestsTo(fn (Request $request) => route('login'));
@@ -39,7 +41,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 return route('admin.dashboard');
             }
 
-            return route('dashboard');
+            return route('user.dashboard');
         });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
