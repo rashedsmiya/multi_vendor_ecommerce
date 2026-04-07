@@ -1,4 +1,4 @@
-import { Head, Link, router, useForm, usePage } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import {
     Bell,
     BookOpen,
@@ -11,9 +11,7 @@ import {
 
 import UserDashboardLayout from '@/layouts/user-dashboard-layout.tsx';
 import { switchRole } from '@/routes/user';
-import { dashboard as operatorDashboard } from '@/routes/operator';
-import { dashboard as userDashboard } from '@/routes/user';
-import { type SharedData } from '@/types';  
+import { type SharedData } from '@/types';
 
 const figmaImages = {
     courseThumbnail: '/assets/figma/user-dashboard/course-thumbnail.png',
@@ -95,20 +93,15 @@ export default function UserDashboard() {
     const isOperator = auth.user?.is_operator ?? false;
     const { post, processing } = useForm({});
     const handleRoleSwitch = () => {
-        post(switchRole.url(), {
-            onSuccess: () => {
-                router.visit(
-                    isOperator ? operatorDashboard.url() : userDashboard.url(),
-                );
-            },
-        });
+        post(switchRole.url());
     };
 
     const switchButtonLabel = isOperator
         ? 'Switch to Buyer'
         : 'Switch to Seller';
 
-    const displayName = `${auth.user?.first_name ?? ''} ${auth.user?.last_name ?? ''}`.trim();
+    const displayName =
+        `${auth.user?.first_name ?? ''} ${auth.user?.last_name ?? ''}`.trim();
     const firstName = displayName.split(/\s+/)[0] || displayName || 'Client';
 
     return (
@@ -119,10 +112,10 @@ export default function UserDashboard() {
                 <header className="mb-6 flex flex-col gap-4 lg:mb-8">
                     <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                         {/* LEFT SECTION */}
-                        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between w-full">
+                        <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                             <div className="flex min-w-0 items-center gap-3 sm:gap-4">
                                 {/* IMAGE */}
-                                <div className="image-card hidden h-16 w-16 shrink-0 overflow-hidden rounded-2xl border border-figma-gold-border shadow-gold sm:block sm:h-20 sm:w-20">
+                                <div className="image-card border-figma-gold-border shadow-gold hidden h-16 w-16 shrink-0 overflow-hidden rounded-2xl border sm:block sm:h-20 sm:w-20">
                                     <img
                                         src="/assets/dashboard/hero.png"
                                         alt=""
@@ -134,7 +127,9 @@ export default function UserDashboard() {
                                 <div className="flex min-w-0 flex-1 flex-col">
                                     <h1
                                         className="text-lg leading-7 font-medium tracking-tight sm:text-2xl sm:leading-9 md:text-3xl"
-                                        style={{ color: 'var(--figma-heading-alt)' }}
+                                        style={{
+                                            color: 'var(--figma-heading-alt)',
+                                        }}
                                     >
                                         Welcome back, {firstName}!
                                     </h1>
@@ -143,7 +138,8 @@ export default function UserDashboard() {
                                         className="mt-1 text-xs leading-relaxed sm:text-sm md:text-base"
                                         style={{ color: 'var(--figma-slate)' }}
                                     >
-                                        Here's what's happening with your wellness services today.
+                                        Here's what's happening with your
+                                        wellness services today.
                                     </p>
                                 </div>
                             </div>
@@ -153,7 +149,7 @@ export default function UserDashboard() {
                                 type="button"
                                 onClick={handleRoleSwitch}
                                 disabled={processing}
-                                className="w-full sm:w-auto inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border px-4 py-2 text-xs sm:text-sm font-medium transition hover:opacity-90 disabled:opacity-60"
+                                className="inline-flex min-h-10 w-full items-center justify-center gap-2 rounded-lg border px-4 py-2 text-xs font-medium transition hover:opacity-90 disabled:opacity-60 sm:w-auto sm:text-sm"
                                 style={{
                                     borderColor: 'var(--figma-gold)',
                                     color: 'var(--figma-gold)',
@@ -164,12 +160,12 @@ export default function UserDashboard() {
                         </div>
 
                         {/* RIGHT SECTION */}
-                        <div className="flex items-center justify-end gap-3 fixed right-5 top-5 z-50 xl:relative xl:top-0 xl:right-0">
+                        <div className="fixed top-5 right-5 z-50 flex items-center justify-end gap-3 xl:relative xl:top-0 xl:right-0">
                             {/* NOTIFICATION + AVATAR */}
                             <div className="flex items-center gap-2 sm:gap-3">
                                 <button
                                     type="button"
-                                    className="relative flex size-9 items-center justify-center rounded-full border border-figma-border bg-white text-figma-slate hover:bg-figma-trust-bg"
+                                    className="border-figma-border text-figma-slate hover:bg-figma-trust-bg relative flex size-9 items-center justify-center rounded-full border bg-white"
                                     aria-label="Notifications"
                                 >
                                     <Bell className="size-5" />
@@ -177,7 +173,7 @@ export default function UserDashboard() {
                                 </button>
 
                                 <div
-                                    className="flex size-9 sm:size-10 items-center justify-center rounded-full text-xs font-bold text-white"
+                                    className="flex size-9 items-center justify-center rounded-full text-xs font-bold text-white sm:size-10"
                                     style={{
                                         background:
                                             'linear-gradient(180deg, var(--figma-gold) 0%, var(--figma-gold-dark) 100%)',
@@ -197,10 +193,10 @@ export default function UserDashboard() {
                         return (
                             <div
                                 key={card.label}
-                                className="flex flex-col gap-2 rounded-[14px] border border-figma-input-border bg-white p-4 shadow-sm lg:gap-6 lg:p-6"
+                                className="border-figma-input-border flex flex-col gap-2 rounded-[14px] border bg-white p-4 shadow-sm lg:gap-6 lg:p-6"
                             >
                                 <div className="mb-2 flex items-center justify-between gap-2 sm:mb-0 md:flex-col-reverse md:items-start">
-                                    <p className="font-epilogue text-2xl leading-none font-semibold text-figma-heading-alt sm:text-3xl">
+                                    <p className="font-epilogue text-figma-heading-alt text-2xl leading-none font-semibold sm:text-3xl">
                                         {card.value}
                                     </p>
                                     <div
@@ -209,7 +205,7 @@ export default function UserDashboard() {
                                         <Icon className="size-5" />
                                     </div>
                                 </div>
-                                <p className="text-sm leading-5 text-figma-slate">
+                                <p className="text-figma-slate text-sm leading-5">
                                     {card.label}
                                 </p>
                                 {card.sub && (
@@ -225,14 +221,14 @@ export default function UserDashboard() {
                 </div>
 
                 {/* Continue Watching */}
-                <div className="flex flex-col gap-5 rounded-[14px] border border-figma-input-border bg-white p-4 shadow-sm sm:p-6">
+                <div className="border-figma-input-border flex flex-col gap-5 rounded-[14px] border bg-white p-4 shadow-sm sm:p-6">
                     <div className="flex flex-wrap items-center justify-between gap-4">
-                        <h2 className="font-epilogue text-xl leading-7 font-semibold text-figma-heading-alt">
+                        <h2 className="font-epilogue text-figma-heading-alt text-xl leading-7 font-semibold">
                             Continue Watching
                         </h2>
                         <Link
                             href="#"
-                            className="inline-flex items-center gap-1 font-epilogue text-sm font-medium text-figma-gold hover:underline"
+                            className="font-epilogue text-figma-gold inline-flex items-center gap-1 text-sm font-medium hover:underline"
                         >
                             View All
                             <ChevronRight className="size-4" />
@@ -242,7 +238,7 @@ export default function UserDashboard() {
                         {continueWatching.map((item) => (
                             <div
                                 key={item.title}
-                                className="flex gap-4 rounded-[10px] bg-figma-stone p-3 sm:p-4"
+                                className="bg-figma-stone flex gap-4 rounded-[10px] p-3 sm:p-4"
                             >
                                 <div className="relative size-24 shrink-0 overflow-hidden rounded-[10px] bg-gray-200 sm:size-[128px]">
                                     <img
@@ -252,31 +248,31 @@ export default function UserDashboard() {
                                     />
                                     <div className="absolute inset-0 flex items-center justify-center bg-black/20">
                                         <div className="flex size-9 items-center justify-center rounded-full bg-white/90 sm:size-10">
-                                            <Play className="size-4 fill-figma-heading-alt text-figma-heading-alt sm:size-5" />
+                                            <Play className="fill-figma-heading-alt text-figma-heading-alt size-4 sm:size-5" />
                                         </div>
                                     </div>
                                 </div>
                                 <div className="min-w-0 flex-1">
-                                    <p className="font-epilogue text-sm font-medium text-figma-heading-alt">
+                                    <p className="font-epilogue text-figma-heading-alt text-sm font-medium">
                                         {item.title}
                                     </p>
-                                    <p className="text-xs leading-4 text-figma-slate">
+                                    <p className="text-figma-slate text-xs leading-4">
                                         {item.author}
                                     </p>
                                     <div className="mt-2">
-                                        <p className="text-xs text-figma-slate">
+                                        <p className="text-figma-slate text-xs">
                                             {item.progress}% complete
                                         </p>
                                         <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-gray-200">
                                             <div
-                                                className="h-full rounded-full bg-figma-gold"
+                                                className="bg-figma-gold h-full rounded-full"
                                                 style={{
                                                     width: `${item.progress}%`,
                                                 }}
                                             />
                                         </div>
                                     </div>
-                                    <p className="mt-2 text-xs text-figma-slate">
+                                    <p className="text-figma-slate mt-2 text-xs">
                                         Next: {item.next}
                                     </p>
                                 </div>
@@ -286,14 +282,14 @@ export default function UserDashboard() {
                 </div>
 
                 {/* Upcoming Consultations */}
-                <div className="flex flex-col gap-5 rounded-[14px] border border-figma-input-border bg-white p-4 shadow-sm sm:p-6">
+                <div className="border-figma-input-border flex flex-col gap-5 rounded-[14px] border bg-white p-4 shadow-sm sm:p-6">
                     <div className="flex flex-wrap items-center justify-between gap-4">
-                        <h2 className="font-epilogue text-xl leading-7 font-semibold text-figma-heading-alt">
+                        <h2 className="font-epilogue text-figma-heading-alt text-xl leading-7 font-semibold">
                             Upcoming Consultations
                         </h2>
                         <Link
                             href="#"
-                            className="inline-flex items-center gap-1 font-epilogue text-sm font-medium text-figma-gold hover:underline"
+                            className="font-epilogue text-figma-gold inline-flex items-center gap-1 text-sm font-medium hover:underline"
                         >
                             View All
                             <ChevronRight className="size-4" />
@@ -303,26 +299,26 @@ export default function UserDashboard() {
                         {upcomingConsultations.map((item) => (
                             <div
                                 key={item.title}
-                                className="flex flex-wrap items-center gap-3 rounded-[10px] bg-figma-stone p-3 sm:flex-nowrap"
+                                className="bg-figma-stone flex flex-wrap items-center gap-3 rounded-[10px] p-3 sm:flex-nowrap"
                             >
                                 <div className="flex size-8 shrink-0 items-center justify-center rounded-[10px] bg-purple-100 text-purple-600">
                                     <Users className="size-4" />
                                 </div>
                                 <div className="min-w-0 flex-1">
-                                    <p className="font-epilogue text-sm font-medium text-figma-heading-alt">
+                                    <p className="font-epilogue text-figma-heading-alt text-sm font-medium">
                                         {item.title}
                                     </p>
-                                    <p className="text-xs text-figma-slate">
+                                    <p className="text-figma-slate text-xs">
                                         with {item.with}
                                     </p>
-                                    <p className="mt-0.5 text-xs text-figma-slate">
+                                    <p className="text-figma-slate mt-0.5 text-xs">
                                         {item.when} • {item.time} •{' '}
                                         {item.duration}
                                     </p>
                                 </div>
                                 <Link
                                     href="#"
-                                    className="shrink-0 rounded-lg border border-figma-input-border bg-figma-warm-white px-3 py-1.5 font-epilogue text-xs font-medium text-figma-heading hover:bg-figma-stone"
+                                    className="border-figma-input-border bg-figma-warm-white font-epilogue text-figma-heading hover:bg-figma-stone shrink-0 rounded-lg border px-3 py-1.5 text-xs font-medium"
                                 >
                                     View Details
                                 </Link>

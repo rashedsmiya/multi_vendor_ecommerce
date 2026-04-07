@@ -11,12 +11,12 @@ class CoursesController extends Controller
 {
     public function index(Request $request): Response
     {
-        return Inertia::render('backend/User/MyAccount/Courses');
+        return Inertia::render('backend/User/UserDashboard/Courses');
     }
 
     public function show(Request $request, string $course): Response
     {
-        return Inertia::render('backend/User/MyAccount/CourseShow', [
+        return Inertia::render('backend/User/UserDashboard/CourseShow', [
             'course' => $course,
         ]);
     }

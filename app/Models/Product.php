@@ -17,12 +17,20 @@ class Product extends Model
         'slug',
         'operator_profile_id',
         'category_id',
+        'product_type',
+        'stock_quantity',
+        'sku',
+        'weight',
+        'dimensions',
     ];
 
     protected $casts = [
         'price' => 'float',
         'is_active' => 'boolean',
         'average_rating' => 'float',
+        'stock_quantity' => 'integer',
+        'weight' => 'float',
+        'dimensions' => 'array',
     ];
 
     public function scopeActive($query)
@@ -38,5 +46,10 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class)->orderBy('sort_order');
     }
 }

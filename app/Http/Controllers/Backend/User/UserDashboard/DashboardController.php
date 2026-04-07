@@ -26,6 +26,10 @@ class DashboardController extends Controller
         $user->is_operator = ! $user->is_operator;
         $user->save();
 
-        return redirect()->route($user->is_operator ? 'operator.dashboard' : 'user.dashboard');
+        $redirectUrl = $user->is_operator
+            ? route('operator.dashboard')
+            : route('user.dashboard');
+
+        return redirect($redirectUrl);
     }
 }

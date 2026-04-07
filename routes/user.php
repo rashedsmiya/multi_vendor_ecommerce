@@ -13,6 +13,10 @@ use App\Http\Controllers\Backend\User\UserDashboard\ProfileController;
 use App\Http\Controllers\Backend\User\UserDashboard\ReferController;
 use Illuminate\Support\Facades\Route;
 
+Route::middleware(['auth', 'verified'])->prefix('user')->name('user.')->group(function () {
+    Route::post('/switch-role', [DashboardController::class, 'switchRole'])->name('switch-role');
+});
+
 Route::middleware(['auth', 'verified', 'buyer'])->prefix('user')->name('user.')->group(function () {
     // User Routes
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -34,9 +38,5 @@ Route::middleware(['auth', 'verified', 'buyer'])->prefix('user')->name('user.')-
     Route::get('/refer', [ReferController::class, 'index'])->name('refer');
     Route::get('/community', [CommunityController::class, 'index'])->name('community');
     Route::get('/messages', [MessagesController::class, 'messages'])->name('messages');
-    Route::post('/switch-role', function () {
-        // Handle role switching logic
-        return back()->with('success', 'Role switched successfully.');
-    })->name('switch-role');
 
 });
