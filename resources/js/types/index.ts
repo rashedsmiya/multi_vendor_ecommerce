@@ -3,52 +3,61 @@ export * from './data-table.types';
 
 // User type
 export interface User {
-  id: number;
-  first_name: string;
-  last_name: string;
-  email: string;
-  is_operator?: boolean;
-  [key: string]: any;
+    id: number;
+    first_name: string;
+    last_name: string;
+    email: string;
+    is_operator?: boolean;
+    [key: string]: any;
 }
 
 // Navigation types
 export interface NavItem {
-  title: string;
-  href?: string;
-  icon?: React.ReactNode;
-  badge?: string | number;
-  children?: NavItem[];
-  permissions?: string[];
-  active?: boolean;
-  external?: boolean;
-  [key: string]: any;
+    title: string;
+    href?: string;
+    icon?: React.ReactNode;
+    badge?: string | number;
+    children?: NavItem[];
+    permissions?: string[];
+    active?: boolean;
+    external?: boolean;
+    [key: string]: any;
 }
 
 export interface DropdownPosition {
-  top?: number;
-  right?: number;
-  bottom?: number;
-  left?: number;
+    top?: number;
+    right?: number;
+    bottom?: number;
+    left?: number;
 }
 
 // Breadcrumb type
 export interface BreadcrumbItem {
-  title: string;
-  href?: string;
+    title: string;
+    href?: string;
+}
+
+// Locale types
+export interface AvailableLocale {
+    code: string;
+    native: string;
+    name: string;
 }
 
 // Shared data interface for Inertia
 export interface SharedData {
-  auth: {
-    user: User | null;
+    auth: {
+        user: User | null;
+        [key: string]: any;
+    };
+    features?: Record<string, any>;
+    appName?: string;
+    ziggy?: {
+        location: string;
+        url: string;
+        [key: string]: any;
+    };
+    locale: string;
+    availableLocales: AvailableLocale[];
     [key: string]: any;
-  };
-  features?: Record<string, any>;
-  appName?: string;
-  ziggy?: {
-    location: string;
-    url: string;
-    [key: string]: any;
-  };
-  [key: string]: any;
 }

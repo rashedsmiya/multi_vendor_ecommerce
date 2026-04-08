@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
+use Inertia\Inertia;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
+        $this->configureInertia();
     }
 
     protected function configureDefaults(): void
@@ -44,5 +46,17 @@ class AppServiceProvider extends ServiceProvider
                     ->uncompromised()
                 : null
         );
+    }
+
+    protected function configureInertia(): void
+    {
+        Inertia::share([
+            'locale' => fn () => session('locale', config('app.locale')),
+            'availableLocales' => [
+                ['code' => 'en', 'native' => 'English', 'name' => 'English'],
+                ['code' => 'es', 'native' => 'Español', 'name' => 'Spanish'],
+                ['code' => 'fr', 'native' => 'Français', 'name' => 'French'],
+            ],
+        ]);
     }
 }

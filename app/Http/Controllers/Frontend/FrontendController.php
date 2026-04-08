@@ -176,4 +176,16 @@ class FrontendController extends Controller
             'categoriesByService' => $categoriesByService,
         ]);
     }
+
+    public function updateLocale(Request $request)
+    {
+        $request->validate([
+            'locale' => 'required|string|in:en,es,fr', // Add supported locales
+        ]);
+
+        session(['locale' => $request->locale]);
+        app()->setLocale($request->locale);
+
+        return redirect()->back();
+    }
 }

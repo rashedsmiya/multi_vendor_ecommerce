@@ -1,5 +1,6 @@
-import FrontendLayout from '@/layouts/frontend-layout';
 import { Head } from '@inertiajs/react';
+
+import FrontendLayout from '@/layouts/frontend-layout';
 
 interface CourseDetailsProps {
     course: {

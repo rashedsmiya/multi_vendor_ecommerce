@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Tooltip, TooltipProps } from 'recharts';
+
 import { cn } from '@/lib/utils';
 
 export type ChartConfig = Record<

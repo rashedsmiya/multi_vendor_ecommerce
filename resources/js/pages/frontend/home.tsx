@@ -3,8 +3,8 @@ import { Head } from '@inertiajs/react';
 import BringPracticeOnlineSection from '@/components/frontend/home/bring-practice-online-section.tsx';
 import HowItWorksSection from '@/components/frontend/home/how-it-works-section.tsx';
 // import PractitionerCtaSection from '@/components/frontend/home/practitioner-cta-section';
-import FrontendLayout from '@/layouts/frontend-layout';
 import LandingHero from '@/components/frontend/home/landing-hero';
+import FrontendLayout from '@/layouts/frontend-layout';
 
 export default function Home() {
     return (

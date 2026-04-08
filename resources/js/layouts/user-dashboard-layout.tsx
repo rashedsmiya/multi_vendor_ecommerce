@@ -1,9 +1,9 @@
+import { Menu } from 'lucide-react';
 import { type ReactNode, useEffect, useState } from 'react';
 
-import { UserSidebar } from '@/layouts/partials/user/sidebar';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu } from 'lucide-react';
 import { useAppearance } from '@/hooks/use-appearance';
+import { UserSidebar } from '@/layouts/partials/user/sidebar';
 
 interface UserDashboardLayoutProps {
     children: ReactNode;

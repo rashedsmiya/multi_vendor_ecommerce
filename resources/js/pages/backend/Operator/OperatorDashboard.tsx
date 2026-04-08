@@ -16,8 +16,8 @@ import {
     type ChartConfig,
 } from '@/components/ui/chart';
 import OperatorDashboardLayout from '@/layouts/operator-dashboard-layout';
-import { switchRole } from '@/routes/user';
 import { dashboard as operatorDashboard } from '@/routes/operator';
+import { switchRole } from '@/routes/user';
 import { dashboard as userDashboard } from '@/routes/user';
 import { type SharedData } from '@/types';
 
